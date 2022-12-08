@@ -1,0 +1,29 @@
+.task_item-container {
+  background-image: linear-gradient(269.54deg, #384065 17.93%, rgba(53, 61, 96, 0.4843) 47.71%, rgba(44, 51, 80, 0.43) 84.63%);
+  border-radius: 12px;
+  height: 60px;
+}
+
+.task_item-container:not(:only-child):not(:last-child) { margin-bottom: 1.43rem; }
+
+.task_item-container > .btn-container { 
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 100%;
+}
+
+.task_item-container .title-text {
+  font-size: 1.6rem;
+  margin-left: 1.2rem;
+  padding-right: 1rem;
+
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1;
+}
+
+.task_item-container .icons-container > .flag-icon { margin-right: 1.2rem; }

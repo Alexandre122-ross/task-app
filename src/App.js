@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import TaskItemComponent from './components/taskItem';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='wrapper d-center'>
+      <div className='app-container'>
+        <h2 className='title-text'> To-Do List </h2>
+
+        <div className='task-container'>
+          <button className='btn-container add_task_btn-container'>
+            Add Task
+          </button>
+
+          <ul className='task_list-container'>
+
+            <TaskItemComponent titleTask='Lembrete' />
+            <TaskItemComponent titleTask='Prova de Programação' />
+            <TaskItemComponent titleTask='Ministrar Aula' />
+
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
