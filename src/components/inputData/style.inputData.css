@@ -1,0 +1,47 @@
+.input_data-container {
+  background-color: transparent;
+  border: 2px solid #444B6E;
+  border-radius: 12px;
+  position: relative;
+  height: fit-content;
+}
+
+.input_data-container:not(:last-child) { margin-bottom: 2rem; }
+
+.input_data-container .data-input {
+  background-color: transparent;
+  color: #f2f5f9;
+  border: none;
+  outline: none;
+  font-size: 1.1rem;
+  padding: 0 1.2rem;
+  height: 45px;
+  width: 100%;
+}
+
+.input_data-container .textarea-input {
+  resize: none;
+  padding: 1rem 1.2rem;
+  height: 120px;
+}
+
+.input_data-container .data-input::placeholder { color: rgba(242, 245, 249, .85); }
+
+.input_data-container .label_input-text {
+  background-color: #373c5c;
+  color: rgba(242, 245, 249, .85);
+  font-size: 1.1rem;
+  pointer-events: none;
+  position: absolute;
+  top: .75rem;
+  left: .25rem;
+  padding: .5rem .6rem;
+  transition: all .35s;
+}
+
+.input_data-container .data-input:focus + .label_input-text,  
+.input_data-container .data-input:not(:placeholder-shown) + .label_input-text {
+  font-weight: 600;
+  top: -1.5rem; 
+  left: .5rem;
+}

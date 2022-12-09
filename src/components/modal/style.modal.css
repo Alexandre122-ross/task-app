@@ -1,0 +1,74 @@
+.modal_bg-container {
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transition: background-color .35s;
+}
+
+.modal_bg_active-container {
+  background-color: rgba(0, 0, 0, .25);
+  pointer-events: inherit;
+}
+
+.modal_bg-container .modal-container {
+  background-color: #373c5c;
+  overflow: hidden;
+  border-radius: 12px;
+  position: absolute;
+  right: 0;
+  bottom: -100%;
+  left: 0;
+  margin: auto;
+  height: fit-content;
+  width: 90%;
+  max-width: 350px;
+  transition: all .35s;
+}
+
+.modal_bg-container .modal_active-container {
+  top: 0;
+  bottom: 0;
+}
+
+.modal-container > div { padding: 1.2rem; }
+
+.modal-container .header_modal-container {
+  background-color: #444B6E;
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.header_modal-container .title-text { 
+  font-size: 1.6rem; 
+  font-weight: 600;
+}
+
+.section_modal-container .quick_action-container {
+  border-bottom: 2px solid #444B6E;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.quick_action-container .flag-icon { margin-right: 1.2rem; }
+
+.section_modal-container .form_modal-container { padding-top: 2rem; }
+
+.form_modal-container .form_action-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  height: 45px;
+}
+
+.form_action-container .btn-container { width: 120px; }

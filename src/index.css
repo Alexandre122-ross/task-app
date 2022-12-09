@@ -29,6 +29,29 @@ body {
   width: 100%;
 }
 
+.btn_aborter-container {
+  color: #F50C44;
+  border-color: #F50C44;
+  transition: all .35s;
+}
+
+.btn_aborter-container:hover { background-color: #F50C44; }
+
+.btn_confirme-container {
+  color: #0060F0;
+  border-color: #0060F0;
+  transition: all .35s;
+}
+
+.btn_confirme-container:hover { background-color: #0060F0; }
+
+.btn_aborter-container:hover, 
+.btn_confirme-container:hover { color: #f2f5f9; }
+
+.flag_active-icon { color: #FFB931; }
+
+.trash-icon { color: #F50C44; }
+
 .wrapper { height: 100vh; }
 
 .app-container {
@@ -37,7 +60,7 @@ body {
   border-radius: 1.2rem;
   padding: 1.2rem;
   padding-top: 5rem;
-  height: 85%;
+  height: 80%;
   width: 90%;
   max-height: 600px;
   max-width: 600px;

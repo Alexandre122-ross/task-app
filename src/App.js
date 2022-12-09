@@ -1,13 +1,25 @@
+import { useState } from 'react';
+import ModalComponent from './components/modal';
 import TaskItemComponent from './components/taskItem';
 
 function App() {
+  const [showAddModal, setShowAddModal] = useState(false);
+
   return (
     <div className='wrapper d-center'>
+      <ModalComponent 
+        open={showAddModal} 
+        handleClose={() => setShowAddModal(false)} 
+      />
+
       <div className='app-container'>
         <h2 className='title-text'> To-Do List </h2>
 
         <div className='task-container'>
-          <button className='btn-container add_task_btn-container'>
+          <button 
+            className='btn-container add_task_btn-container' 
+            onClick={() => setShowAddModal(true)}
+          >
             Add Task
           </button>
 
