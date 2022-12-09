@@ -48,9 +48,16 @@ body {
 .btn_aborter-container:hover, 
 .btn_confirme-container:hover { color: #f2f5f9; }
 
+.icon { cursor: pointer; }
+
 .flag_active-icon { color: #FFB931; }
 
 .trash-icon { color: #F50C44; }
+
+.disable-icon { 
+  opacity: .6; 
+  cursor: context-menu;
+}
 
 .wrapper { height: 100vh; }
 

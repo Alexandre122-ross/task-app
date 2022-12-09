@@ -1,16 +1,32 @@
-import { BsCheckCircle, BsFlag, BsTrash } from 'react-icons/bs';
-// Style
+import { BsCheckCircle, BsFlag, BsFlagFill, BsTrash } from 'react-icons/bs';
+import { useTask } from '../../context/taskProvider';
 import './style.taskItem.css';
 
-function TaskItemComponent({ titleTask }) {
+function TaskItemComponent({ dataTask, handeActiveTaskUpdate }) {
+  const { handleCompletedTask, handleFlagTask, handleDeleteTask } = useTask();
+
   return (
-    <li className='task_item-container'>
-      <button type='button' className='btn-container'>
-        <BsCheckCircle size={20} />
-        <h2 className='title-text'> {titleTask} </h2>
+    <li className={`task_item-container ${dataTask.completeTask ? 'completed-task' : ''}`}>
+      <button type='button' className='btn-container' onClick={() => handeActiveTaskUpdate(dataTask)}>
+        <BsCheckCircle size={20} onClick={(e) => handleCompletedTask(e, dataTask)} />
+        <h2 className='title-text'> {dataTask.titleTask} </h2>
         <div className='icons-container d-center'>
-          <BsFlag size={20} className='flag-icon' />
-          <BsTrash size={20} className='trash-icon' />
+          {!dataTask.priorityTask
+            ? <BsFlag
+              size={22}
+              className='flag-icon'
+              onClick={(e) => handleFlagTask(e, dataTask)}
+            />
+            : <BsFlagFill
+              size={22}
+              className='flag-icon flag_active-icon'
+              onClick={(e) => handleFlagTask(e, dataTask)}
+            />}
+          <BsTrash 
+            size={20} 
+            className='trash-icon' 
+            onClick={(e) => handleDeleteTask(e, dataTask)} 
+          />
         </div>
       </button>
     </li>

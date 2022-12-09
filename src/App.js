@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { useTask } from './context/taskProvider';
 import ModalComponent from './components/modal';
 import TaskItemComponent from './components/taskItem';
 
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
+  const { taskList } = useTask();
 
   return (
     <div className='wrapper d-center'>
       <ModalComponent 
         open={showAddModal} 
+        data={{ uid: '', titleTask: '', descriptionTask: '' }}
         handleClose={() => setShowAddModal(false)} 
       />
 
@@ -25,9 +28,13 @@ function App() {
 
           <ul className='task_list-container'>
 
-            <TaskItemComponent titleTask='Lembrete' />
-            <TaskItemComponent titleTask='Prova de Programação' />
-            <TaskItemComponent titleTask='Ministrar Aula' />
+            {taskList.map((item) => 
+              <TaskItemComponent 
+                key={item.uid} 
+                dataTask={item} 
+                handeActiveTaskUpdate={(data) => console.log(data)}
+              />
+            )}
 
           </ul>
         </div>

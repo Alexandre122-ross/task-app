@@ -1,20 +1,27 @@
 import { useState } from 'react';
-import { BsCheckCircle, BsFlag, BsTrash } from 'react-icons/bs';
+import { BsCheckCircle, BsFlag, BsFlagFill, BsTrash } from 'react-icons/bs';
+import { useTask } from '../../context/taskProvider';
 import InputDataComponent from '../inputData';
 import './style.modal.css';
 
-function ModalComponent({ open, handleClose }) {
-  const [titleTask, setTitleTask] = useState('');
-  const [descriptionTask, setDescriptionTask] = useState('');
+function ModalComponent({ open, data, handleClose }) {
+  const [titleTask, setTitleTask] = useState(data.titleTask);
+  const [descriptionTask, setDescriptionTask] = useState(data.descriptionTask);
+  const [completeTask, setCompleteTask] = useState(data.completeTask);
+  const [priorityTask, setPriorityTask] = useState(data.priorityTask);
+  const { handleAddTask } = useTask();
 
-  const handleAddTask = () => {
+  const handleModalAction = () => {
     if(titleTask !== '') {
-      console.log('Title: ' + titleTask);
-      console.log('Description: ' + descriptionTask);
+      let data = { titleTask, descriptionTask, completeTask, priorityTask }
+
+      handleAddTask(data);
 
       // Reset
       setTitleTask('');
       setDescriptionTask('');
+      setCompleteTask(false);
+      setPriorityTask(false);
 
       // Close Modal
       handleClose();
@@ -30,11 +37,26 @@ function ModalComponent({ open, handleClose }) {
 
         <div className='section_modal-container'>
           <div className='quick_action-container'>
-            <BsCheckCircle size={22} />
+            <BsCheckCircle 
+              size={22} 
+              color={completeTask ? '#009cff' : null} 
+              className='icon' 
+              onClick={() => setCompleteTask(!completeTask)}  
+            />
 
             <div className='icon-container'>
-              <BsFlag size={22} className='flag-icon' />
-              <BsTrash size={22} className='trash-icon' />
+              {!priorityTask
+                ? <BsFlag
+                  size={22}
+                  className='icon flag-icon'
+                  onClick={() => setPriorityTask(true)}
+                />
+                : <BsFlagFill
+                  size={22}
+                  className='icon flag-icon flag_active-icon'
+                  onClick={() => setPriorityTask(false)}
+                />}
+              <BsTrash size={22} className='icon trash-icon disable-icon' />
             </div>
           </div>
 
@@ -64,7 +86,7 @@ function ModalComponent({ open, handleClose }) {
               <button 
                 type='button' 
                 className='btn-container btn_confirme-container'
-                onClick={handleAddTask}
+                onClick={handleModalAction}
               > 
                 Add 
               </button>
