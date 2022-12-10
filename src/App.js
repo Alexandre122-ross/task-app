@@ -5,14 +5,21 @@ import TaskItemComponent from './components/taskItem';
 
 function App() {
   const [showAddModal, setShowAddModal] = useState(false);
-  const { taskList } = useTask();
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const { taskList, dataTaskUpdate } = useTask();
 
   return (
     <div className='wrapper d-center'>
       <ModalComponent 
         open={showAddModal} 
-        data={{ uid: '', titleTask: '', descriptionTask: '' }}
+        modalData={{ uid: '', titleTask: '', descriptionTask: '', completeTask: false, priorityTask: false }}
         handleClose={() => setShowAddModal(false)} 
+      />
+      <ModalComponent 
+        open={showUpdateModal}
+        typeModal='update'
+        modalData={dataTaskUpdate}
+        handleClose={() => setShowUpdateModal(false)}   
       />
 
       <div className='app-container'>
@@ -32,7 +39,7 @@ function App() {
               <TaskItemComponent 
                 key={item.uid} 
                 dataTask={item} 
-                handeActiveTaskUpdate={(data) => console.log(data)}
+                handleActiveUpdateModal={() => setShowUpdateModal(true)}
               />
             )}
 

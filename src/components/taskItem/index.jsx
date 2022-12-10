@@ -2,12 +2,17 @@ import { BsCheckCircle, BsFlag, BsFlagFill, BsTrash } from 'react-icons/bs';
 import { useTask } from '../../context/taskProvider';
 import './style.taskItem.css';
 
-function TaskItemComponent({ dataTask, handeActiveTaskUpdate }) {
-  const { handleCompletedTask, handleFlagTask, handleDeleteTask } = useTask();
+function TaskItemComponent({ dataTask, handleActiveUpdateModal }) {
+  const { handleShowUpdateModal, handleCompletedTask, handleFlagTask, handleDeleteTask } = useTask();
+
+  const handleActiveUpdate = () => {
+    handleShowUpdateModal(dataTask);
+    handleActiveUpdateModal();
+  };
 
   return (
     <li className={`task_item-container ${dataTask.completeTask ? 'completed-task' : ''}`}>
-      <button type='button' className='btn-container' onClick={() => handeActiveTaskUpdate(dataTask)}>
+      <button type='button' className='btn-container' onClick={handleActiveUpdate}>
         <BsCheckCircle size={20} onClick={(e) => handleCompletedTask(e, dataTask)} />
         <h2 className='title-text'> {dataTask.titleTask} </h2>
         <div className='icons-container d-center'>

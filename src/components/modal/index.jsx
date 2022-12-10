@@ -1,38 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsCheckCircle, BsFlag, BsFlagFill, BsTrash } from 'react-icons/bs';
 import { useTask } from '../../context/taskProvider';
 import InputDataComponent from '../inputData';
 import './style.modal.css';
 
-function ModalComponent({ open, data, handleClose }) {
-  const [titleTask, setTitleTask] = useState(data.titleTask);
-  const [descriptionTask, setDescriptionTask] = useState(data.descriptionTask);
-  const [completeTask, setCompleteTask] = useState(data.completeTask);
-  const [priorityTask, setPriorityTask] = useState(data.priorityTask);
-  const { handleAddTask } = useTask();
+function ModalComponent({ open, typeModal = 'add', modalData, handleClose }) {
+  const [titleTask, setTitleTask] = useState(modalData.titleTask);
+  const [descriptionTask, setDescriptionTask] = useState(modalData.descriptionTask);
+  const [completeTask, setCompleteTask] = useState(modalData.completeTask);
+  const [priorityTask, setPriorityTask] = useState(modalData.priorityTask);
+  const { handleAddTask, handleUpdateTask } = useTask();
 
   const handleModalAction = () => {
     if(titleTask !== '') {
-      let data = { titleTask, descriptionTask, completeTask, priorityTask }
+      let data = { uid: modalData.uid, titleTask, descriptionTask, completeTask, priorityTask }
 
-      handleAddTask(data);
-
-      // Reset
-      setTitleTask('');
-      setDescriptionTask('');
-      setCompleteTask(false);
-      setPriorityTask(false);
+      if(typeModal === 'add') {
+        handleAddTask(data);
+  
+        // Reset
+        setTitleTask('');
+        setDescriptionTask('');
+        setCompleteTask(false);
+        setPriorityTask(false);
+      }
+      
+      if(typeModal !== 'add') {
+        handleUpdateTask(data);
+      }
 
       // Close Modal
       handleClose();
     }
   }
 
+  useEffect(() => {
+    if(modalData.titleTask !== '') {
+      setTitleTask(modalData.titleTask);
+      setDescriptionTask(modalData.descriptionTask);
+      setCompleteTask(modalData.completeTask);
+      setPriorityTask(modalData.priorityTask);
+    }
+  }, [modalData])
+
   return (
     <div className={`modal_bg-container d-center- ${open ? 'modal_bg_active-container' : ''}`}>
       <div className={`modal-container ${open ? 'modal_active-container' : ''}`}>
         <div className='header_modal-container'>
-          <h2 className='title-text'> Add Task </h2>
+          <h2 className='title-text'> {typeModal === 'add' ? 'Add' : 'Update'} Task </h2>
         </div>
 
         <div className='section_modal-container'>
@@ -88,7 +103,7 @@ function ModalComponent({ open, data, handleClose }) {
                 className='btn-container btn_confirme-container'
                 onClick={handleModalAction}
               > 
-                Add 
+                {typeModal === 'add' ? 'Add' : 'Update'} 
               </button>
             </div>
           </form>
